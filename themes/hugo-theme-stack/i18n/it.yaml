@@ -1,0 +1,39 @@
+toggleMenu: Toggle Menu
+
+darkMode: Dark Mode
+
+list:
+    page:
+        one: "{{ .Count }} pagina"
+        other: "{{ .Count }} pagine"
+    section: Sezione
+    subsection:
+        one: Sottosezione
+        other: Sottosezioni
+
+article:
+    back: Indietro
+    tableOfContents: Indice
+    relatedContent: Contenuti correlati
+    lastUpdatedOn: Aggiornato il
+    readingTime:
+        one: "{{ .Count }} min per leggere"
+        other: "{{ .Count }} min per leggere"
+
+notFound:
+    title: Non trovato
+    subtitle: Questa pagina non esiste.
+
+widget:
+    archives:
+        title: Archivi
+        more: Di più
+
+search:
+    title: Cerca
+    placeholder: Scrivi qualcosa...
+    resultTitle: "#PAGES_COUNT pagine (#TIME_SECONDS secondi)"
+
+footer:
+    builtWith: Realizzato con {{ .Generator }}
+    designedBy: Tema {{ .Theme }} realizzato da {{ .DesignedBy }}

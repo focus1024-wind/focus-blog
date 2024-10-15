@@ -1,0 +1,40 @@
+toggleMenu: Показати меню
+
+darkMode: Темна тема
+
+list:
+    page:
+        one: "{{ .Count }} сторінка"
+        few: "{{ .Count }} сторінки"
+        other: "{{ .Count }} сторінок"
+    section: Секція
+    subsection:
+        one: Підсекція
+        other: Підсекції
+
+article:
+    back: Назад
+    tableOfContents: Зміст
+    relatedContent: Схожі матеріали
+    lastUpdatedOn: Востаннє оновлено
+    readingTime:
+        one: "Час читання: {{ .Count }} хв"
+        other: "Час читання: {{ .Count }} хв"
+
+notFound:
+    title: Не знайдено
+    subtitle: Ця сторінка не існує
+
+widget:
+    archives:
+        title: Архіви
+        more: Більше
+
+search:
+    title: Пошук
+    placeholder: Напишіть що-небудь...
+    resultTitle: "#PAGES_COUNT сторінок (#TIME_SECONDS секунд)"
+
+footer:
+    builtWith: Створено з {{ .Generator }}
+    designedBy: Тема {{ .Theme }}, дизайн {{ .DesignedBy }}

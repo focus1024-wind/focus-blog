@@ -1,0 +1,34 @@
+toggleMenu: Menüyü Gizle
+
+darkMode: Koyu Mod
+
+list:
+    page:
+        one: "{{ .Count }} makale"
+        other: "{{ .Count }} makale"
+    section: Bölüm
+    subsection:
+        one: Alt bölüm
+        other: Alt bölümler
+
+article:
+    relatedContent: Alakalı içerikler
+    lastUpdatedOn: Son güncelleme
+
+notFound:
+    title: Bulunamadı
+    subtitle: Aradığınız sayfa mevcut değil.
+
+widget:
+    archives:
+        title: Arşiv
+        more: Daha fazla
+
+search:
+    title: Arama
+    placeholder: Birşeyler yazın...
+    resultTitle: "#PAGES_COUNT sayfa (#TIME_SECONDS saniye)"
+
+footer:
+    builtWith: "{{ .Generator }} ile oluşturuldu."
+    designedBy: "{{ .Theme }} teması {{ .DesignedBy }} tarafından tasarlandı"

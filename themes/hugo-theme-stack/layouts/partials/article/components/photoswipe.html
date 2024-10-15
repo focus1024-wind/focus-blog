@@ -1,0 +1,20 @@
+{{- $opts := dict "minify" hugo.IsProduction "format" "esm" -}}
+{{- $galleryScript := resources.Get "ts/gallery.ts" | js.Build $opts -}}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.2.7/dist/photoswipe.css"
+    integrity="sha256-olf9rfn3AG8zR6lkPXkN3PZq63z8tElx7Ela6T4eklo=" crossorigin="anonymous">
+
+<script type="module">
+    import StackGallery from '{{ $galleryScript.RelPermalink }}';
+    import PhotoSwipeLightbox from 'https://cdn.jsdelivr.net/npm/photoswipe@5.2.7/dist/photoswipe-lightbox.esm.min.js';
+    
+    console.log(StackGallery)
+    StackGallery(document.querySelector('.article-content'));
+
+    const lightbox = new PhotoSwipeLightbox({
+        gallery: '.article-content',
+        children: '.gallery-image a',
+        pswpModule: () => import('https://cdn.jsdelivr.net/npm/photoswipe@5.2.7/dist/photoswipe.esm.min.js')
+    });
+    lightbox.init();
+</script>

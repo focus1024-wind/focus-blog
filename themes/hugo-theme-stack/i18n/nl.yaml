@@ -1,0 +1,35 @@
+toggleMenu: Open Menu
+
+darkMode: Donkere modus
+
+list:
+    page:
+        one: "{{ .Count }} pagina"
+        other: "{{ .Count }} pagina's"
+    section: Sectie
+    subsection:
+        one: Subsectie
+        other: Subsecties
+
+article:
+    relatedContent: Gerelateerde inhoud
+    lastUpdatedOn: Laatst bijgewerkt op
+    readingTime: "{{ .Count }} leestijd"
+
+notFound:
+    title: Niet gevonden
+    subtitle: Deze pagina bestaat niet.
+
+widget:
+    archives:
+        title: Archief
+        more: Meer
+
+search:
+    title: Zoeken
+    placeholder: Typ iets
+    resultTitle: "#PAGES_COUNT pagina's (#TIME_SECONDS seconden)"
+
+footer:
+    builtWith: Gemaakt met {{ .Generator }}
+    designedBy: Theme {{ .Theme }} ontworpen door {{ .DesignedBy }}

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用Canvas绘制不规则图形</title>
+    <style type="text/css">
+        #canvas-container {
+            border: 1px solid red;
+        }
+    </style>
+    <script text="application/javascript">
+        let canvas;
+        let ctx;
+        let tempCanvas;
+        let tempCtx;
+
+        // 初始化画布
+        function initCanvas(canvasId, tempCanvasId) {
+            canvas = document.getElementById(canvasId);
+            if (canvas.getContext) {
+                ctx = canvas.getContext("2d");
+                canvas.addEventListener('mousedown', mousedown);
+            }
+            tempCanvas = document.getElementById(tempCanvasId);
+            if (tempCanvas.getContext) {
+                tempCtx = tempCanvas.getContext("2d");
+                tempCanvas.addEventListener('mousedown', mousedown);
+            }
+        }
+
+        const CANVAS_WIDTH = 300;
+        const CANVAS_HEIGHT = 150;
+        const MAX_POINT_NUM = 8;
+
+        // 记录所有点位
+        let pointList = [];
+        // 记录当前闭合状态
+        let closeStatus = false;
+
+        // 鼠标按下事件：开始绘制图形
+        const mousedown = (e) => {
+            // 记录当前点击点位，并将其转换为画布尺寸
+            let pointDown = {
+                x: e.offsetX / canvas.offsetWidth * CANVAS_WIDTH,
+                y: e.offsetY / canvas.offsetHeight * CANVAS_HEIGHT
+            };
+
+            if (pointList.length === 0) {
+                // 是第一个点：初始化绘制事件
+                ctx.beginPath();
+                ctx.moveTo(pointDown.x, pointDown.y);
+            } else if (closeStatus) {
+                // 图形已闭合：不再绘制
+                return;
+            } else {
+                // 其他点位，和上一个点进行连线
+                ctx.lineTo(pointDown.x, pointDown.y);
+                ctx.stroke();
+            }
+
+            // 记录所有点位
+            pointList.push({
+                ...pointDown
+            });
+
+            // 最大点数，闭合图形
+            if (pointList.length >= MAX_POINT_NUM) {
+                // 这里采用限制点数的方式进行图形闭合，也可以采用其他方法闭合，如点击起始点附件 x 个元素时进行闭合
+                closeFigure();
+                return;
+            }
+
+            // 鼠标跟随移动
+            document.onmousemove = (event) => {
+                tempCtx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+                tempCtx.beginPath();
+                tempCtx.moveTo(pointDown.x, pointDown.y);
+                tempCtx.lineTo(event.offsetX / tempCanvas.offsetWidth * CANVAS_WIDTH, event.offsetY / tempCanvas.offsetHeight * CANVAS_HEIGHT);
+                tempCtx.stroke();
+            }
+        }
+
+        // 重置画布
+        function clearRect() {
+            document.onmousemove = document.onmouseup = null;
+            ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+            tempCtx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+            pointList = [];
+            closeStatus = false;
+        }
+
+        function closeFigure() {
+            if (!closeStatus && checkPointCross()) {
+                // 存在点位交叉：不符合绘制要求，重绘
+                // ToDo: 错误提示
+                clearRect();
+            };
+
+            if (pointList.length >= MAX_POINT_NUM && !closeStatus) {
+                // 符合要求：结束绘制
+                document.onmousemove = document.onmouseup = null;
+                tempCtx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+                ctx.lineTo(pointList[0].x, pointList[0].y);
+                ctx.closePath();
+                ctx.stroke();
+                closeStatus = true;
+            }
+        }
+
+        // 辅助函数：获取以原点为起点的向量坐标表达式
+        function getPointVector(startPoint, endPoint) {
+            return {
+                x: endPoint.x - startPoint.x,
+                y: endPoint.y - startPoint.y,
+            };
+        }
+
+        // 辅助函数：叉乘
+        const crossLine = (point1, point2) => {
+            return point1.x * point2.y - point2.x * point1.y;
+        }
+
+        /**
+        * 辅助函数：判断两条线段是否交叉
+        * 以line1_start_point为点A，line1_end_point为点B，line2_start_point为点C，line2_end_point为点D
+        * 做两线AB、CD
+        * 若AB与CD相交：AB与CD呈十字交叉状
+        *    向量AC与AD异号
+        * 
+        * 存在AB与CD呈 |- 形状，此时有向量AC与AD异号，但是不相交的情况
+        * 做向量CA和向量CB，此时向量同号
+        * 
+        * 所以：
+        *    1.计算向量AC和向量AD的叉乘
+        *    2.计算向量CA和向量CB的叉乘
+        *    3.若以上两条计算结果同时满足叉乘 < 0, 则线条交叉
+        */
+        function isLineCross(line1_start_point, line1_end_point, line2_start_point, line2_end_point) {
+            let line_AB = getPointVector(line1_start_point, line1_end_point)
+            let line_AC = getPointVector(line1_start_point, line2_start_point);
+            let line_AD = getPointVector(line1_start_point, line2_end_point);
+
+            let line_CD = getPointVector(line2_start_point, line2_end_point);
+            let line_CA = getPointVector(line2_start_point, line1_start_point);
+            let line_CB = getPointVector(line2_start_point, line1_end_point);
+
+            let AB_cross_AC = crossLine(line_AB, line_AC)
+            let AB_cross_AD = crossLine(line_AB, line_AD);
+
+            let CD_cross_CA = crossLine(line_CD, line_CA);
+            let CD_cross_CB = crossLine(line_CD, line_CB);
+
+            if (AB_cross_AC * AB_cross_AD < 0 && CD_cross_CA * CD_cross_CB < 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        // 检查图形有没有横穿
+        function checkPointCross(crossAllow = false) {
+            if (crossAllow) {
+                // 允许横穿，直接返回
+                return false;
+            }
+            if (pointList.length < 3) {
+                // 2条连续线条直接必不可能存在横穿现象
+                return false;
+            }
+            for (let i = 0; i < pointList.length - 2; i++) {
+                for (let j = i + 1; j < pointList.length; j++) {
+                    let res = isLineCross(
+                        pointList[i],
+                        pointList[i + 1],
+                        pointList[j],
+                        pointList[(j + 1) % pointList.length]
+                    );
+                    if (res) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+    </script>
+</head>
+
+<body onload="initCanvas('canvas-container', 'temp-canvas-container');">
+    <!-- 通过position让连个画布的HTML元素重叠 -->
+    <canvas id="canvas-container" style="position: absolute;"></canvas>
+    <canvas id="temp-canvas-container" style="position: absolute;"></canvas>
+</body>
+
+</html>

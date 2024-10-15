@@ -1,0 +1,45 @@
+{{- $image := .Page.Resources.GetMatch (printf "%s" (.Destination | safeURL)) -}}
+{{- $Permalink := .Destination | relURL | safeURL -}}
+{{- $alt := .PlainText | safeHTML -}}
+{{- $Width := 0 -}}
+{{- $Height := 0 -}}
+{{- $Srcset := "" -}}
+{{- $imageProcessing := .Page.Site.Params.imageProcessing.content.enabled -}}
+{{- $allowedTypes := .Page.Site.Params.ImageProcessing.AllowedTypes -}}
+{{- $resizableTypes := .Page.Site.Params.ImageProcessing.ResizableTypes -}}
+{{- $galleryImage := false -}}
+
+{{- if $image -}}
+	{{- $type := $image.MediaType.SubType -}}
+	{{- $allowed := in $allowedTypes $type -}}
+    {{- $resizable := in $resizableTypes $type -}}
+    {{- $imageProcessing := and $imageProcessing $resizable -}}
+	{{- $Permalink = $image.RelPermalink -}}
+
+	{{- if $allowed -}}
+		{{- $Width = $image.Width -}}
+		{{- $Height = $image.Height -}}
+		{{- $galleryImage = true -}}
+
+		{{- if $imageProcessing -}}
+			{{- $small := $image.Resize `480x` -}}
+			{{- $big := $image.Resize `1024x` -}}
+			{{- $Srcset = printf `%s 480w, %s 1024w` $small.RelPermalink $big.RelPermalink -}}
+		{{- end -}}
+	{{- end -}}
+{{- end -}}
+
+<img src="{{ $Permalink }}"
+	{{ with $Width }}width="{{ . }}"{{ end }}
+	{{ with $Height }}height="{{ . }}"{{ end }}
+	{{ with $Srcset }}srcset="{{ . }}"{{ end }}
+	loading="lazy"
+	{{ with $alt }}
+		alt="{{ . }}"
+	{{ end }}
+	{{ if $galleryImage }}
+		class="gallery-image" 
+		data-flex-grow="{{ div (mul $image.Width 100) $image.Height }}"
+		data-flex-basis="{{ div (mul $image.Width 240) $image.Height }}px"
+	{{ end }}
+>

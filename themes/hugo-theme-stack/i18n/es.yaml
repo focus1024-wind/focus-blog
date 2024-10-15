@@ -1,0 +1,39 @@
+toggleMenu: Ocultar menú
+
+darkMode: Modo oscuro
+
+list:
+    page:
+        one: "{{ .Count }} página"
+        other: "{{ .Count }} páginas"
+    section: Sección
+    subsection:
+        one: Subsección
+        other: Subsecciones
+
+article:
+    back: Volver
+    tableOfContents: Tabla de contenido
+    relatedContent: Contenidos relacionados
+    lastUpdatedOn: Última actualización
+    readingTime:
+        one: "Tiempo de lectura {{ .Count }} minuto"
+        other: "Tiempo de lectura {{ .Count }} minutos"
+
+notFound:
+    title: No Encontrado
+    subtitle: Esta página no existe
+
+widget:
+    archives:
+        title: Archivo
+        more: Más
+
+search:
+    title: Búsqueda
+    placeholder: Escribe algo...
+    resultTitle: "#PAGES_COUNT páginas en (#TIME_SECONDS segundos)"
+
+footer:
+    builtWith: Creado con {{ .Generator }}
+    designedBy: Tema {{ .Theme }} diseñado por {{ .DesignedBy }}

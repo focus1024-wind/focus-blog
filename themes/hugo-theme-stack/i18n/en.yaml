@@ -1,0 +1,42 @@
+toggleMenu: Toggle Menu
+
+darkMode: Dark Mode
+
+list:
+    page:
+        one: "{{ .Count }} page"
+        other: "{{ .Count }} pages"
+    section: Section
+    subsection:
+        one: Subsection
+        other: Subsections
+
+article:
+    back: Back
+    tableOfContents: Table of contents
+    relatedContent: Related content
+    lastUpdatedOn: Last updated on
+    readingTime:
+        one: "{{ .Count }} minute read"
+        other: "{{ .Count }} minute read"
+    codeblock:
+        copy: Copy
+        copied: Copied!
+
+notFound:
+    title: Not Found
+    subtitle: This page does not exist
+
+widget:
+    archives:
+        title: Archives
+        more: More
+
+search:
+    title: Search
+    placeholder: Type something...
+    resultTitle: "#PAGES_COUNT pages (#TIME_SECONDS seconds)"
+
+footer:
+    builtWith: Built with {{ .Generator }}
+    designedBy: Theme {{ .Theme }} designed by {{ .DesignedBy }}

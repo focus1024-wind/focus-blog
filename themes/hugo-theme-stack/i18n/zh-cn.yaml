@@ -1,0 +1,28 @@
+toggleMenu: 切换菜单
+
+darkMode: 暗色模式
+
+article:
+    back: 返回
+    tableOfContents: 目录
+    relatedContent: 相关文章
+    lastUpdatedOn: 最后更新于
+    readingTime: "阅读时长: {{ .Count }} 分钟"
+
+notFound:
+    title: 404 错误
+    subtitle: 页面不存在
+
+widget:
+    archives:
+        title: 归档
+        more: 更多
+
+search:
+    title: 搜索
+    placeholder: 输入关键词...
+    resultTitle: "#PAGES_COUNT 个结果 （用时 #TIME_SECONDS 秒）"
+
+footer:
+    builtWith: Built with {{ .Generator }}
+    designedBy: 主题 {{ .Theme }} 由 {{ .DesignedBy }} 设计
