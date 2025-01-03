@@ -2,7 +2,8 @@
 # baseurl: http://localhost
 languageCode: zh-cn
 # 页面显示文章数
-paginate: 5
+pagination:
+  pagerSize: 5
 
 # 当前主题
 theme: hugo-theme-stack
@@ -22,194 +23,194 @@ googleAnalytics:
 
 
 languages:
-    zh-cn:
-        params:
-            languageName: 简体中文
-            title: 北溪入江流
-            description: 我见青山多妩媚，料青山见我应如是。
-            # 国际化权重，1表示在语言选项中的第一个为当前配置
-            weight: 1
+  zh-cn:
+    params:
+      languageName: 简体中文
+      title: 北溪入江流
+      description: 我见青山多妩媚，料青山见我应如是。
+      # 国际化权重，1表示在语言选项中的第一个为当前配置
+      weight: 1
 
 
 # Hugo MarkDown配置
 markup:
-    # goldmark：Hugo MarkDown默认库
-    goldmark:
-        renderer:
-            # 允许Markown中嵌入HTML
-            unsafe: true
-    # toc目录设置
-    tableOfContents:
-        startLevel: 1
-        endLevel: 4
-        ordered: true
-    # 高亮设置
-    # https://gohugo.io/getting-started/configuration-markup/#highlight
-    highlight:
-        noClasses: false
-        codeFences: true
-        guessSyntax: true
-        lineNoStart: 1
-        lineNos: true
-        lineNumbersInTable: true
-        tabWidth: 4
+  # goldmark：Hugo MarkDown默认库
+  goldmark:
+    renderer:
+      # 允许Markown中嵌入HTML
+      unsafe: true
+  # toc目录设置
+  tableOfContents:
+    startLevel: 1
+    endLevel: 4
+    ordered: true
+  # 高亮设置
+  # https://gohugo.io/getting-started/configuration-markup/#highlight
+  highlight:
+    noClasses: false
+    codeFences: true
+    guessSyntax: true
+    lineNoStart: 1
+    lineNos: true
+    lineNumbersInTable: true
+    tabWidth: 4
 
 
 menu:
-    # 主菜单配置: 在{siteName}\content\page目录下可配置，若不需要主菜单，删除main选项即可
-    # 社交菜单配置
-    social:
-        -   # 菜单编号   
-            identifier: GitHub
-            # 菜单名称，显示文本
-            name: GitHub
-            # 指向链接
-            url: https://github.com/focus-wind
-            params:
-                # 菜单svg图标配置
-                # #首先寻找{siteName}\assets\icons\{icon}.svg矢量图，建议将自己所需的矢量图放在该文件夹下
-                # #找不到则寻找{themeName}\assets\icons\{icon}.svg矢量图
-                # #hugo-theme-stack主题的图标默认配色为#bababa，若下载矢量图需修改矢量图配色为#bababa，以便统一配色
-                icon: github
-                # 设置是在本页面打开还是在新标签页打开
-                newTab: true
-        -   identifier: Mail
-            name: Mail
-            url: mailto:focus-wind@foxmail.com
-            params:
-                icon: mail
-                newTab: true
-        -   identifier: YuQue
-            name: YuQue
-            url: https://www.yuque.com/focus_wind
-            params:
-                icon: yuque
-                newTab: true
-    
+  # 主菜单配置: 在{siteName}\content\page目录下可配置，若不需要主菜单，删除main选项即可
+  # 社交菜单配置
+  social:
+    - # 菜单编号
+      identifier: GitHub
+      # 菜单名称，显示文本
+      name: GitHub
+      # 指向链接
+      url: https://github.com/focus-wind
+      params:
+        # 菜单svg图标配置
+        # #首先寻找{siteName}\assets\icons\{icon}.svg矢量图，建议将自己所需的矢量图放在该文件夹下
+        # #找不到则寻找{themeName}\assets\icons\{icon}.svg矢量图
+        # #hugo-theme-stack主题的图标默认配色为#bababa，若下载矢量图需修改矢量图配色为#bababa，以便统一配色
+        icon: github
+        # 设置是在本页面打开还是在新标签页打开
+        newTab: true
+    - identifier: Mail
+      name: Mail
+      url: mailto:focus-wind@foxmail.com
+      params:
+        icon: mail
+        newTab: true
+    - identifier: YuQue
+      name: YuQue
+      url: https://www.yuque.com/focus_wind
+      params:
+        icon: yuque
+        newTab: true
+
 
 # theme主题配置
 params:
-    # 网站ico设置
-    favicon:  
+  # 网站ico设置
+  favicon:
 
-    #　页脚设置
-    footer:
-        # 创建网站的年份
-        since: 2023
-        # 页脚显示文字
-        customText: "陕ICP备2023020057号"
+  #　页脚设置
+  footer:
+    # 创建网站的年份
+    since: 2023
+    # 页脚显示文字
+    customText: "陕ICP备2023020057号"
 
-    # 侧边栏设置
-    sidebar:
-        emoji: 🍥
-        # 侧边栏副标题
-        subtitle: 我见青山多妩媚，料青山见我应如是 | Follow One Cause Until Success
-        avatar:
-            enabled: true
-            local: true
-            # 头像设置
-            src: img/avatar.png
-        # 紧凑模式
-        compact: false
+  # 侧边栏设置
+  sidebar:
+    emoji: 🍥
+    # 侧边栏副标题
+    subtitle: 我见青山多妩媚，料青山见我应如是 | Follow One Cause Until Success
+    avatar:
+      enabled: true
+      local: true
+      # 头像设置
+      src: img/avatar.png
+    # 紧凑模式
+    compact: false
 
-    # 评论系统设置
-    comments:
-        enabled: true
-        provider: waline
+  # 评论系统设置
+  comments:
+    enabled: true
+    provider: waline
 
-        waline:
-            serverURL: http://121.36.92.11:10002
-            lang: zh-CN
-            pageview: true
-            avatar:
-            emoji:
-                - https://cdn.jsdelivr.net/gh/walinejs/emojis/qq
-            requiredMeta:
-                - nick
-                - mail
-            locale:
-                # 管理员标签
-                admin: Admin
+    waline:
+      serverURL: http://121.36.92.11:10002
+      lang: zh-CN
+      pageview: true
+      avatar:
+      emoji:
+        - https://cdn.jsdelivr.net/gh/walinejs/emojis/qq
+      requiredMeta:
+        - nick
+        - mail
+      locale:
+        # 管理员标签
+        admin: Admin
 
-    # 部件设置
-    widgets:
-        # 主页部件设置
-        homepage:
-            - type: search
-            - type: archives
-              params:
-                  limit: 5
-            - type: taxonomy
-              params:
-                limit: 10
-                type: categories
-                icon: categories
-            - type: taxonomy
-              params:
-                limit: 10
-                type: tags
-                icon: tag
-        # 文章界面部件设置
-        page:
-            - type: search
-            - type: toc
-    
-    # 文章设置
-    article:
-        # 设置对KaTeX的支持
-        math: true
-        # 文章目录显示
-        toc: true
-        # 文章预计阅读时间显示
-        readingTime: true
-        # 文章许可证设置
-        license:
-            enabled: true
-            default: Licensed under CC BY-NC-SA 4.0
-    
-    # 日期格式设置
-    dateFormat:
-        # 文章发布时间
-        published: 2006/01/02
-        # 最后修改日期，UTC：世界标准时间
-        lastUpdated: 2006/01/02 15:04(UTC) UTC
+  # 部件设置
+  widgets:
+    # 主页部件设置
+    homepage:
+      - type: search
+      - type: archives
+        params:
+          limit: 5
+      - type: taxonomy
+        params:
+          limit: 10
+          type: categories
+          icon: categories
+      - type: taxonomy
+        params:
+          limit: 10
+          type: tags
+          icon: tag
+    # 文章界面部件设置
+    page:
+      - type: search
+      - type: toc
 
-    # 配色方案设置
-    colorScheme:
-        # 设置是否允许切换配色方案
-        toggle: true
-        # 可选项：auto、light、dark
-        default: auto
-    
-    # 图像处理设置
-    imageProcessing:
-        cover:
-            enabled: true
-        content:
-            enabled: true
-    
+  # 文章设置
+  article:
+    # 设置对KaTeX的支持
+    math: true
+    # 文章目录显示
+    toc: true
+    # 文章预计阅读时间显示
+    readingTime: true
+    # 文章许可证设置
+    license:
+      enabled: true
+      default: Licensed under CC BY-NC-SA 4.0
+
+  # 日期格式设置
+  dateFormat:
+    # 文章发布时间
+    published: 2006/01/02
+    # 最后修改日期，UTC：世界标准时间
+    lastUpdated: 2006/01/02 15:04(UTC) UTC
+
+  # 配色方案设置
+  colorScheme:
+    # 设置是否允许切换配色方案
+    toggle: true
+    # 可选项：auto、light、dark
+    default: auto
+
+  # 图像处理设置
+  imageProcessing:
+    cover:
+      enabled: true
+    content:
+      enabled: true
+
 
 # 访问链接设置
 permalinks:
-    # 设置主页（Home）的索引，避免本地编译时无法找到主页
-    home: /index/
-    # 文章链接设置
-    post: /post/:slug
-    # 页面链接设置
-    page: /:slug/
-    # 标签链接设置
-    tags: /tags/:slug/
-    # 分类链接设置
-    category: /category/:slug/
+  # 设置主页（Home）的索引，避免本地编译时无法找到主页
+  home: /index/
+  # 文章链接设置
+  post: /post/:slug
+  # 页面链接设置
+  page: /:slug/
+  # 标签链接设置
+  tags: /tags/:slug/
+  # 分类链接设置
+  category: /category/:slug/
 
 
 # Hugo相关内容配置
 related:
-    includeNewer: true
-    threshold: 60
-    toLower: false
-    indices:
-        - name: tags
-          weight: 100
-        - name: categories
-          weight: 200
+  includeNewer: true
+  threshold: 60
+  toLower: false
+  indices:
+    - name: tags
+      weight: 100
+    - name: categories
+      weight: 200
