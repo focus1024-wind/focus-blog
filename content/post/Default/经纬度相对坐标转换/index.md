@@ -1,6 +1,6 @@
 ---
 title: 经纬度相对坐标转换
-description: 将
+description: 将经纬度坐标点位置信息转换为对应的相对坐标
 date: 2025-01-03
 slug: latitude_and_longitude_2D_coordinates
 image:
