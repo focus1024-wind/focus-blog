@@ -119,7 +119,7 @@ params:
     provider: waline
 
     waline:
-      serverURL: http://121.36.92.11:10002
+      serverURL: https://waline.focus1024.com
       lang: zh-CN
       pageview: true
       avatar:
